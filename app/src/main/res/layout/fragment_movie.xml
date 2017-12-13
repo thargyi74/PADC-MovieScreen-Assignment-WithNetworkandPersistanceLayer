@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tool:context="com.yeminnaing.padc_moviescreenassignment.fragments.MovieFragment">
+
+    <com.yeminnaing.padc_moviescreenassignment.conponents.SmartRecyclerView
+        android:id="@+id/rv_movies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:columnWidth="@dimen/item_movie_width"
+        android:padding="@dimen/margin_small" />
+
+    <include
+        layout="@layout/view_pod_empty"
+        android:id="@+id/vp_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</FrameLayout>
