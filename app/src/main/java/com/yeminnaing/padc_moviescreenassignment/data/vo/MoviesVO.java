@@ -38,7 +38,7 @@ public class MoviesVO {
     private String originalTitle;
 
     @SerializedName("genre_ids")
-    private List<Integer> genereIds;
+    private List<Integer> genreIds;
 
     @SerializedName("backdrop_path")
     private String backdropPath;
@@ -88,8 +88,8 @@ public class MoviesVO {
         return originalTitle;
     }
 
-    public List<Integer> getGenereIds() {
-        return genereIds;
+    public List<Integer> getGenreIds() {
+        return genreIds;
     }
 
     public String getBackdropPath() {

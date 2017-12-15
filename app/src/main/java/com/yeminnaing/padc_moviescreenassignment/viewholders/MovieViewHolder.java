@@ -19,11 +19,12 @@ import butterknife.ButterKnife;
 public class MovieViewHolder extends BaseViewHolder<MoviesVO> {
 
     @BindView(R.id.iv_poster)
-    ImageView ivHero;
-    @BindView(R.id.tv_rating)
-    TextView tvRating;
+    ImageView ivPoster;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_rating)
+    TextView tvRating;
+
 
     private MoviesVO mPopularMovie;
 
@@ -39,11 +40,13 @@ public class MovieViewHolder extends BaseViewHolder<MoviesVO> {
 
     @Override
     public void bindData() {
-        Glide.with(itemView.getContext())
-                .load(AppConstants.BASE_URL + mPopularMovie.getPosterPath())
-                .into(ivHero);
+
         tvRating.setText(String.valueOf(mPopularMovie.getVoteAverage()));
         tvTitle.setText(mPopularMovie.getTitle());
+
+        Glide.with(itemView.getContext())
+                .load(AppConstants.IMAGE_BASE_URL + mPopularMovie.getPosterPath())
+                .into(ivPoster);
     }
 
     @Override

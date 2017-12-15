@@ -65,11 +65,6 @@ public class MovieFragment extends BaseFragment implements MovieItemDelegate{
         rvMovies.setAdapter(movieAdapter);
         MovieModel.getInstance().startLoadingPopularMovies();
 
-    /*mSmartScrollListener = new SmartScrollListener(new SmartScrollListener.OnSmartScrollListener() {
-      @Override public void onListEndReach() {
-        PopularMovieModel.getInstance().startLoadingPopularMovies();
-      }
-    });*/
 
         return view;
     }
