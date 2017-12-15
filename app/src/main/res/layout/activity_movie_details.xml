@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yeminnaing.padc_moviescreenassignment.activities.MovieDetailsActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_container_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/detail_padding_bottom_navigation">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/movie_detail_backdrop_height"
+                    android:focusableInTouchMode="true">
+
+                    <ImageView
+                        android:id="@+id/iv_backdrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/cd_iv_backdrop"
+                        android:foreground="@color/black_transparent_overlay"
+                        android:scaleType="centerCrop"
+                        tools:src="@drawable/movie_backdrop" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black_transparent_overlay" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/margin_large"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingRight="@dimen/margin_medium"
+                            android:weightSum="2">
+
+                            <RelativeLayout
+                                android:id="@+id/fl_container_poster"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:elevation="@dimen/poster_elevation">
+
+                                <ImageView
+                                    android:id="@+id/iv_poster"
+                                    android:layout_width="@dimen/item_movie_width"
+                                    android:layout_height="@dimen/item_movie_height"
+                                    android:layout_marginLeft="@dimen/margin_medium_2"
+                                    android:layout_marginTop="@dimen/margin_medium_2"
+                                    android:contentDescription="@string/cd_iv_poster"
+                                    tools:src="@drawable/movie_poster" />
+
+                                <TextView
+                                    android:id="@+id/tv_rating_detail"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_margin="@dimen/margin_small"
+                                    android:background="@drawable/ic_favorite_white_24dp"
+                                    android:gravity="center"
+                                    android:text="4.4"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="@dimen/text_regular_3x"
+                                    tools:text="6.2" />
+
+                                <include
+                                    android:id="@+id/vp_expand_poster"
+                                    layout="@layout/view_pod_expand_poster"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBottom="@id/iv_poster"
+                                    android:layout_alignRight="@id/iv_poster"
+                                    android:layout_marginBottom="@dimen/margin_medium_3" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:id="@+id/tv_tag_line"
+                                    style="@style/TextWithShadow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/margin_medium"
+                                    android:layout_marginTop="@dimen/margin_large"
+                                    android:fontFamily="sans-serif-condensed"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="@dimen/text_regular_3x"
+                                    tools:text="Ant-Man" />
+
+                                <android.support.v4.widget.NestedScrollView
+                                    android:id="@+id/sv_overview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@id/tv_tag_line"
+                                    android:layout_marginLeft="@dimen/margin_medium"
+                                    android:layout_marginTop="@dimen/margin_medium"
+                                    android:scrollbars="vertical"
+                                    android:fadeScrollbars="false">
+
+                                    <TextView
+                                        android:id="@+id/tv_overview"
+                                        style="@style/TextWithShadow"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-condensed"
+                                        android:lineSpacingExtra="1.2dp"
+                                        android:paddingBottom="@dimen/margin_medium_2"
+                                        android:text="@string/movie_detail_overview"
+                                        android:textColor="@color/text_white"
+                                        android:textSize="@dimen/text_regular"
+                                        />
+
+                                </android.support.v4.widget.NestedScrollView>
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:paddingLeft="@dimen/margin_medium">
+
+                            <com.yeminnaing.padc_moviescreenassignment.conponents.ViewPodMoviePopularityDetail
+                                android:id="@+id/vp_movie_popularity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_medium"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-condensed"
+                                    android:text="Released"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="@dimen/text_regular_2x"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-condensed"
+                                    android:text=" : "
+                                    android:textColor="@color/text_white"
+                                    android:textSize="@dimen/text_regular_2x" />
+
+                                <TextView
+                                    android:id="@+id/tv_release_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-condensed"
+                                    android:text="April 2017"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="@dimen/text_regular_2x"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            style="@style/TextWithShadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/primary"
+                            android:elevation="@dimen/tag_line_elevation"
+                            android:ellipsize="end"
+                            android:fontFamily="sans-serif-condensed"
+                            android:gravity="center_vertical"
+                            android:lineSpacingExtra="1.2dp"
+                            android:maxLines="1"
+                            android:padding="@dimen/margin_medium_2"
+                            android:text="Guardians of the Galaxy Vol. 2"
+                            android:textColor="@color/text_white"
+                            android:textSize="@dimen/text_regular_3x" />
+
+                    </LinearLayout>
+
+                    <!--<include
+                        android:id="@+id/vp_fabs"
+                        layout="@layout/view_pod_fabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />-->
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:orientation="vertical">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_medium">
+
+                            <com.yeminnaing.padc_moviescreenassignment.conponents.ViewPodGenreListDetail
+                                android:id="@+id/vp_container_genre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/margin_medium" />
+
+                        </HorizontalScrollView>
+
+                        <TextView
+                            android:id="@+id/tv_runtime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_medium"
+                            android:background="@drawable/runtime_bg"
+                            android:fontFamily="sans-serif-light"
+                            android:padding="@dimen/margin_medium"
+                            android:text="2 hours 18 min"
+                            android:textColor="@color/text_white"
+                            android:textSize="@dimen/text_regular"
+                            />
+
+                    </LinearLayout>
+
+                    <com.yeminnaing.padc_moviescreenassignment.conponents.SmartRecyclerView
+                        android:id="@+id/rv_trailers"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/trailer_container_height"
+                        android:clipToPadding="false"
+                        android:columnWidth="@dimen/item_movie_height"
+                        android:paddingLeft="@dimen/margin_medium_2"
+                        android:paddingRight="@dimen/margin_medium_2" />
+
+                    <TextView
+                        android:id="@+id/lbl_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        android:paddingLeft="@dimen/margin_medium_2"
+                        android:text="@string/lbl_reviews"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/text_regular_3x" />
+
+                    <com.yeminnaing.padc_moviescreenassignment.conponents.ViewPodReviews
+                        android:id="@+id/vp_reviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_collection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_medium_2"
+                        android:fontFamily="sans-serif-condensed"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        android:paddingLeft="@dimen/margin_medium_2"
+                        android:text="The Super-hero Collection"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/text_regular_3x"
+                        android:visibility="gone"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+<!--
+
+        <include
+            android:id="@+id/vp_movie_star"
+            layout="@layout/view_pod_movie_star"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/vc_loader"
+            layout="@layout/view_component_loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+-->
+
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>

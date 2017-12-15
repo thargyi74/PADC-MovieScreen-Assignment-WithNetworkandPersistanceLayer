@@ -41,4 +41,52 @@
     <dimen name="pager_padding">0dp</dimen>
     <dimen name="item_movie_width">196dp</dimen>
 
+    <!-- Specific -->
+
+    <dimen name="trailer_container_height">212dp</dimen>
+    <dimen name="trailer_container_width">264dp</dimen>
+    <dimen name="item_movie_height">248dp</dimen>
+
+    <dimen name="movie_detail_backdrop_height">400dp</dimen>
+
+    <dimen name="movie_title_min_height">60dp</dimen>
+    <dimen name="loader_dimen">55dp</dimen>
+    <dimen name="poster_elevation">2dp</dimen>
+    <dimen name="tag_line_elevation">4dp</dimen>
+
+    <dimen name="runtime_border_stroke">2dp</dimen>
+    <dimen name="detail_padding_bottom_navigation">40dp</dimen>
+
+
+
+    <dimen name="width_left_menu">300dp</dimen>
+    <dimen name="user_info_height">200dp</dimen>
+    <dimen name="button_border_stroke">1dp</dimen>
+
+    <dimen name="profile_dimen">100dp</dimen>
+    <dimen name="padding_login">10dp</dimen>
+
+
+
+    <dimen name="fab_dimen">55dp</dimen>
+    <dimen name="movie_star_margin_top">60dp</dimen>
+    <dimen name="empty_favourite_text_padding">50dp</dimen>
+    <dimen name="margin_tablet_movie_detail_horizontal">100dp</dimen>
+    <dimen name="margin_tablet_movie_detail_vertical">100dp</dimen>
+
+    <dimen name="dimen_310">115dp</dimen>
+    <dimen name="dimen_280">100dp</dimen>
+    <dimen name="dimen_180">80dp</dimen>
+    <dimen name="dimen_160">65dp</dimen>
+    <dimen name="dimen_30">10dp</dimen>
+    <dimen name="dimen_20">5dp</dimen>
+
+    <dimen name="pb_dimen">55dp</dimen>
+    <dimen name="search_auto_complete_height">200dp</dimen>
+
+    <dimen name="margin_top_menu_list">@dimen/margin_large</dimen>
+    <dimen name="margin_bottom_app_version">@dimen/margin_large</dimen>
+    <dimen name="padding_menu_item">@dimen/margin_medium_2</dimen>
+    <dimen name="corner_radius_small">4dp</dimen>
+
 </resources>
