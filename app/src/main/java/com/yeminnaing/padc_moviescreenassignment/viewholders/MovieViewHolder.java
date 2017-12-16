@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yeminnaing.padc_moviescreenassignment.R;
 import com.yeminnaing.padc_moviescreenassignment.data.vo.MoviesVO;
+import com.yeminnaing.padc_moviescreenassignment.delegates.MovieItemDelegate;
 import com.yeminnaing.padc_moviescreenassignment.utils.AppConstants;
 
 import butterknife.BindView;
@@ -27,6 +28,8 @@ public class MovieViewHolder extends BaseViewHolder<MoviesVO> {
 
 
     private MoviesVO mPopularMovie;
+
+    private MovieItemDelegate mDelegate;
 
     public MovieViewHolder(View itemView) {
         super(itemView);
@@ -51,6 +54,9 @@ public class MovieViewHolder extends BaseViewHolder<MoviesVO> {
 
     @Override
     public void onClick(View v) {
+
+       // mDelegate.onTapMovieOverview();
+
 
     }
 }

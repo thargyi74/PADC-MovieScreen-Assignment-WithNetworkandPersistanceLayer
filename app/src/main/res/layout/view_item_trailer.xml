@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="@dimen/item_movie_height"
+    android:layout_height="@dimen/item_movie_width">
+
+
+
+        <ImageView
+            android:id="@+id/iv_trailer_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/cd_iv_trailer_preview"
+            android:scaleType="centerCrop"
+            android:src="@drawable/trailer_02" />
+
+        <ImageView
+            android:id="@+id/iv_trailer_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_trailer_play" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/margin_small"
+            android:fontFamily="sans-serif-light"
+            android:text="Official Trailer"
+            android:textColor="@color/text_white"
+            />
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/margin_small"
+            android:fontFamily="sans-serif-light"
+            android:text="Teaser"
+            android:textColor="@color/text_white"
+            />
+
+
+
+</FrameLayout>

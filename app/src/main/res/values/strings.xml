@@ -15,4 +15,5 @@
     <string name="cd_iv_backdrop">Backdrop image of the tvSeries</string>
     <string name="movie_detail_overview">Brash space adventurer Peter Quill (Chris Pratt) finds himself the quarry of relentless bounty hunters after he steals an orb coveted by Ronan, a powerful villain. To evade Ronan, Quill is forced into an uneasy truce with four disparate misfits: gun-toting Rocket Raccoon, treelike-humanoid Groot, enigmatic Gamora, and vengeance-driven Drax the Destroyer. But when he discovers the orb\'s true power and the cosmic threat it poses, Quill must rally his ragtag group to save the universe.</string>
     <string name="lbl_reviews">Reviews</string>
+    <string name="cd_iv_trailer_preview">Trailer Privew Image</string>
 </resources>

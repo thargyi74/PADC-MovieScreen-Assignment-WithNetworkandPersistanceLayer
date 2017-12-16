@@ -20,4 +20,5 @@ public class MovieListAdapter extends BaseRecyclerAdapter<MovieViewHolder, Movie
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MovieViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_item_movie, parent, false));
     }
+
 }

@@ -69,19 +69,19 @@
                                     android:layout_marginLeft="@dimen/margin_medium_2"
                                     android:layout_marginTop="@dimen/margin_medium_2"
                                     android:contentDescription="@string/cd_iv_poster"
-                                    tools:src="@drawable/movie_poster" />
+                                    android:src="@drawable/movie_poster_2" />
 
                                 <TextView
                                     android:id="@+id/tv_rating_detail"
                                     android:layout_width="48dp"
                                     android:layout_height="48dp"
                                     android:layout_margin="@dimen/margin_small"
-                                    android:background="@drawable/ic_favorite_white_24dp"
+                                    style="@style/MoviePopularity"
                                     android:gravity="center"
                                     android:text="4.4"
                                     android:textColor="@color/text_white"
                                     android:textSize="@dimen/text_regular_3x"
-                                    tools:text="6.2" />
+                                    />
 
                                 <include
                                     android:id="@+id/vp_expand_poster"
@@ -109,7 +109,7 @@
                                     android:fontFamily="sans-serif-condensed"
                                     android:textColor="@color/text_white"
                                     android:textSize="@dimen/text_regular_3x"
-                                    tools:text="Ant-Man" />
+                                    android:text="Guardians of the Galaxy Vol. 2" />
 
                                 <android.support.v4.widget.NestedScrollView
                                     android:id="@+id/sv_overview"
@@ -256,8 +256,7 @@
                             android:padding="@dimen/margin_medium"
                             android:text="2 hours 18 min"
                             android:textColor="@color/text_white"
-                            android:textSize="@dimen/text_regular"
-                            />
+                            android:textSize="@dimen/text_regular" />
 
                     </LinearLayout>
 

@@ -1,7 +1,10 @@
 package com.yeminnaing.padc_moviescreenassignment.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -13,12 +16,14 @@ import android.view.MenuItem;
 
 import com.yeminnaing.padc_moviescreenassignment.R;
 import com.yeminnaing.padc_moviescreenassignment.adapters.MoviePagerAdapter;
+import com.yeminnaing.padc_moviescreenassignment.data.vo.MoviesVO;
+import com.yeminnaing.padc_moviescreenassignment.delegates.MovieItemDelegate;
 import com.yeminnaing.padc_moviescreenassignment.fragments.MovieFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MovieItemDelegate, NavigationView.OnNavigationItemSelectedListener{
 
     @BindView(R.id.pager_for_movies)
     ViewPager pagerMovies;
@@ -81,5 +86,16 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTapMovieOverview(MoviesVO movie) {
+        Intent intent = MovieDetailsActivity.newIntent(getApplicationContext());
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }
