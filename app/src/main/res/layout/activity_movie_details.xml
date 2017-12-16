@@ -213,11 +213,7 @@
 
                     </LinearLayout>
 
-                    <!--<include
-                        android:id="@+id/vp_fabs"
-                        layout="@layout/view_pod_fabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />-->
+
 
                 </FrameLayout>
 
@@ -255,7 +251,7 @@
                             android:fontFamily="sans-serif-light"
                             android:padding="@dimen/margin_medium"
                             android:text="2 hours 18 min"
-                            android:textColor="@color/text_white"
+                            android:textColor="@color/text_brown"
                             android:textSize="@dimen/text_regular" />
 
                     </LinearLayout>
@@ -277,8 +273,15 @@
                         android:paddingBottom="@dimen/margin_medium_2"
                         android:paddingLeft="@dimen/margin_medium_2"
                         android:text="@string/lbl_reviews"
-                        android:textColor="@color/text_white"
+                        android:textColor="@color/text_brown"
                         android:textSize="@dimen/text_regular_3x" />
+
+                    <TextView
+                        android:id="@+id/tv_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_card_medium_2"
+                        android:text="@string/movie_reviews"/>
 
                     <com.yeminnaing.padc_moviescreenassignment.conponents.ViewPodReviews
                         android:id="@+id/vp_reviews"
@@ -305,20 +308,7 @@
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
-<!--
 
-        <include
-            android:id="@+id/vp_movie_star"
-            layout="@layout/view_pod_movie_star"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <include
-            android:id="@+id/vc_loader"
-            layout="@layout/view_component_loader"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
--->
 
     </FrameLayout>
 

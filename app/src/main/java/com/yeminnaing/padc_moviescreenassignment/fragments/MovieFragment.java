@@ -1,5 +1,6 @@
 package com.yeminnaing.padc_moviescreenassignment.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yeminnaing.padc_moviescreenassignment.R;
+import com.yeminnaing.padc_moviescreenassignment.activities.MovieDetailsActivity;
 import com.yeminnaing.padc_moviescreenassignment.adapters.MovieListAdapter;
 import com.yeminnaing.padc_moviescreenassignment.conponents.EmptyViewPod;
 import com.yeminnaing.padc_moviescreenassignment.conponents.SmartRecyclerView;
@@ -61,7 +63,7 @@ public class MovieFragment extends BaseFragment implements MovieItemDelegate{
         ButterKnife.bind(this, view);
         rvMovies.setEmptyView(vpEmptyMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
-        movieAdapter = new MovieListAdapter();
+        movieAdapter = new MovieListAdapter(this);
         rvMovies.setAdapter(movieAdapter);
         MovieModel.getInstance().startLoadingPopularMovies();
 
@@ -87,6 +89,9 @@ public class MovieFragment extends BaseFragment implements MovieItemDelegate{
 
     @Override
     public void onTapMovieOverview(MoviesVO movie) {
+
+        Intent intent = MovieDetailsActivity.newIntent(getContext());
+        startActivity(intent);
 
     }
 

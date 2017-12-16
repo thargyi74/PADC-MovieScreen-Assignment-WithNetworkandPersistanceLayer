@@ -11,4 +11,5 @@
 
     <color name="black_transparent_overlay">#8000</color>
     <color name="text_white">#FFF</color>
+    <color name="text_brown">#D2691E</color>
 </resources>

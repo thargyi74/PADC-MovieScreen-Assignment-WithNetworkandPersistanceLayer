@@ -90,8 +90,7 @@ public class MainActivity extends BaseActivity implements MovieItemDelegate, Nav
 
     @Override
     public void onTapMovieOverview(MoviesVO movie) {
-        Intent intent = MovieDetailsActivity.newIntent(getApplicationContext());
-        startActivity(intent);
+
     }
 
     @Override

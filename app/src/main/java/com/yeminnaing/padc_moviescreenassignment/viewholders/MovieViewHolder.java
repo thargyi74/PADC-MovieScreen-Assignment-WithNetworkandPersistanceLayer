@@ -31,9 +31,10 @@ public class MovieViewHolder extends BaseViewHolder<MoviesVO> {
 
     private MovieItemDelegate mDelegate;
 
-    public MovieViewHolder(View itemView) {
+    public MovieViewHolder(View itemView, MovieItemDelegate movieItemDelegate) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        mDelegate = movieItemDelegate;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class MovieViewHolder extends BaseViewHolder<MoviesVO> {
     @Override
     public void onClick(View v) {
 
-       // mDelegate.onTapMovieOverview();
+       mDelegate.onTapMovieOverview(mPopularMovie);
 
 
     }
