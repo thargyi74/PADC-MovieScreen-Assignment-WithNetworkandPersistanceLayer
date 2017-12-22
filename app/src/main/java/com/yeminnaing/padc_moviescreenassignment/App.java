@@ -10,9 +10,11 @@ import com.yeminnaing.padc_moviescreenassignment.data.model.MovieModel;
 
 public class App extends Application {
 
+    public static final String LOG_TAG = "MoviesApp";
+
     @Override public void onCreate() {
         super.onCreate();
-        MovieModel.getInstance().startLoadingPopularMovies();
+        MovieModel.getInstance().startLoadingPopularMovies(getApplicationContext());
     }
 
 }

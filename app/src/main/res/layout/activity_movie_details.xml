@@ -282,12 +282,14 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_card_medium_2"
                         android:text="@string/movie_reviews"/>
+<!--
 
                     <com.yeminnaing.padc_moviescreenassignment.conponents.ViewPodReviews
                         android:id="@+id/vp_reviews"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical" />
+-->
 
                     <TextView
                         android:id="@+id/tv_collection"

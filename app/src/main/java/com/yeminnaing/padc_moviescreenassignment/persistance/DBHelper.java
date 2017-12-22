@@ -34,10 +34,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_GENRE_IDS_TABLE = " CREATE TABLE " + Contract.GenreIdsEntry.TABLE_NAME + "(" +
             Contract.GenreIdsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            Contract.GenreIdsEntry.COLUMN_MOVIE_ID + "TEXT NOT NULL, " +
             Contract.GenreIdsEntry.COLUMN_GENRE_IDS + " TEXT NOT NULL, " +
+            Contract.GenreIdsEntry.COLUMN_GENRE_NAME + " TEXT NOT NULL, " +
 
             "UNIQUE (" + Contract.GenreIdsEntry._ID + ") ON CONFLICT IGNORE " + ");";
-
 
 
 
@@ -49,8 +50,9 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        sqLiteDatabase.execSQL(SQL_CREATE_MOVIE_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_GENRE_IDS_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_MOVIE_TABLE);
+
 
     }
 

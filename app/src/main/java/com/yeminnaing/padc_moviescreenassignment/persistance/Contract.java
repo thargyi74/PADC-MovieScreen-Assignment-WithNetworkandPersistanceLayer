@@ -82,7 +82,10 @@ public class Contract {
 
         public static final String TABLE_NAME = "genreIds";
 
+        public static final String COLUMN_MOVIE_ID = "movie_ids";
         public static final String COLUMN_GENRE_IDS = "genre_ids";
+        public static final String COLUMN_GENRE_NAME = "genre_name";
+
 
         public static Uri buildGenreIdsUri(long id){
             return ContentUris.withAppendedId(CONTENT_URI, id);

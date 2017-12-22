@@ -1,5 +1,7 @@
 package com.yeminnaing.padc_moviescreenassignment.event;
 
+import android.content.Context;
+
 import com.yeminnaing.padc_moviescreenassignment.data.vo.MoviesVO;
 
 import java.util.List;
@@ -37,10 +39,12 @@ public class RestApiEvents {
     public static class PopularMoviesDataLoadedEvent {
         private int loadedPageIndex;
         private List<MoviesVO> loadedMovies;
+        private Context context;
 
-        public PopularMoviesDataLoadedEvent(int loadedPageIndex, List<MoviesVO> loadedMovies) {
+        public PopularMoviesDataLoadedEvent(int loadedPageIndex, List<MoviesVO> loadedMovies, Context context) {
             this.loadedPageIndex = loadedPageIndex;
             this.loadedMovies = loadedMovies;
+            this.context = context;
         }
 
         public int getLoadedPageIndex() {
@@ -51,6 +55,9 @@ public class RestApiEvents {
             return loadedMovies;
         }
 
+        public Context getContext() {
+            return context;
+        }
     }
 
 }

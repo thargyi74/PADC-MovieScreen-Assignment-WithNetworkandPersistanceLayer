@@ -1,6 +1,10 @@
 package com.yeminnaing.padc_moviescreenassignment.fragments;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,10 +25,14 @@ import com.yeminnaing.padc_moviescreenassignment.data.model.MovieModel;
 import com.yeminnaing.padc_moviescreenassignment.data.vo.MoviesVO;
 import com.yeminnaing.padc_moviescreenassignment.delegates.MovieItemDelegate;
 import com.yeminnaing.padc_moviescreenassignment.event.RestApiEvents;
+import com.yeminnaing.padc_moviescreenassignment.persistance.Contract;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +41,7 @@ import butterknife.ButterKnife;
  * Created by yeminnaing on 11/10/17.
  */
 
-public class MovieFragment extends BaseFragment implements MovieItemDelegate{
+public class MovieFragment extends BaseFragment implements MovieItemDelegate, android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>{
 
 
     @BindView(R.id.rv_movies)
@@ -44,6 +52,8 @@ public class MovieFragment extends BaseFragment implements MovieItemDelegate{
 
     private SmartScrollListener mSmartScrollListener;
     private MovieListAdapter movieAdapter;
+
+    private static final int MOVIES_LIST_LOADER_ID =1001;
 
     public static MovieFragment newInstance() {
         MovieFragment movieFragment = new MovieFragment();
@@ -65,11 +75,15 @@ public class MovieFragment extends BaseFragment implements MovieItemDelegate{
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         movieAdapter = new MovieListAdapter(this);
         rvMovies.setAdapter(movieAdapter);
-        MovieModel.getInstance().startLoadingPopularMovies();
-
-
+        MovieModel.getInstance().startLoadingPopularMovies(getContext());
         return view;
     }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        getLoaderManager().initLoader(MOVIES_LIST_LOADER_ID, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
 
     @Override
     public void onStart() {
@@ -97,11 +111,43 @@ public class MovieFragment extends BaseFragment implements MovieItemDelegate{
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPopularMoviesDataLoaded(RestApiEvents.PopularMoviesDataLoadedEvent event) {
-        movieAdapter.appendNewData(event.getLoadedMovies());
+        /*movieAdapter.appendNewData(event.getLoadedMovies());*/
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorInvokingAPI(RestApiEvents.ErrorInvokingAPIEvent event) {
         //Snackbar.make(rvMovies, event.getErrorMsg(), Snackbar.LENGTH_INDEFINITE).show();
+    }
+
+
+    @Override
+    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new android.support.v4.content.CursorLoader(getActivity(),
+                Contract.MovieEntry.CONTENT_URI,
+                null,
+                null,
+                null,
+                null
+                );
+    }
+
+    @Override
+    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
+        if(data != null && data.moveToFirst()){
+            List<MoviesVO> moviesList = new ArrayList<>();
+
+            do{
+
+                MoviesVO movies = MoviesVO.parseFromCursor(data);
+                moviesList.add(movies);
+            }while (data.moveToNext());
+
+            movieAdapter.appendNewData(moviesList);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
+
     }
 }
