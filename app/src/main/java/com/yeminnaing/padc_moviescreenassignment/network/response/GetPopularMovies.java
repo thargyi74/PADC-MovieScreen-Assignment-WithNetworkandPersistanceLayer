@@ -9,7 +9,7 @@ import java.util.List;
  * Created by yeminnaing on 12/13/17.
  */
 
-public class GetPopularMovies {
+public class GetPopularMovies extends MovieResponse {
 
         @SerializedName("code")
         private int code;

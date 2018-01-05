@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.yeminnaing.padc_moviescreenassignment.event.RestApiEvents;
 import com.yeminnaing.padc_moviescreenassignment.network.response.GetPopularMovies;
+import com.yeminnaing.padc_moviescreenassignment.network.response.MovieCallBack;
 import com.yeminnaing.padc_moviescreenassignment.utils.AppConstants;
 
 import org.greenrobot.eventbus.EventBus;
@@ -17,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
 
 /**
  * Created by yeminnaing on 12/13/17.
@@ -53,7 +55,7 @@ public class MovieDataAgnetImpl implements MovieDataAgent {
 
     @Override
     public void loadPopularMovies(String accessToken, int pageNo, final Context context) {
-        Call<GetPopularMovies> loadPopularMoviesCall = movieAPI.loadPopularMovies(accessToken, pageNo);
+        /*Call<GetPopularMovies> loadPopularMoviesCall = movieAPI.loadPopularMovies(accessToken, pageNo);
         loadPopularMoviesCall.enqueue(new Callback<GetPopularMovies>() {
             @Override
             public void onResponse(Call<GetPopularMovies> call, Response<GetPopularMovies> response) {
@@ -71,6 +73,21 @@ public class MovieDataAgnetImpl implements MovieDataAgent {
             public void onFailure(Call<GetPopularMovies> call, Throwable t) {
                 RestApiEvents.ErrorInvokingAPIEvent errorInvokingAPIEvent = new RestApiEvents.ErrorInvokingAPIEvent(t.getMessage());
                 EventBus.getDefault().post(errorInvokingAPIEvent);
+            }
+        });*/
+
+        Call<GetPopularMovies> loadMovieCall = movieAPI.loadPopularMovies(accessToken, pageNo);
+        loadMovieCall.enqueue(new MovieCallBack<GetPopularMovies>() {
+            @Override
+            public void onResponse(Call<GetPopularMovies> call, Response<GetPopularMovies> response) {
+                super.onResponse(call, response);
+                GetPopularMovies getPopularMoviesResponse = response.body();
+                if (getPopularMoviesResponse != null
+                        && getPopularMoviesResponse.getPopularMovies().size() > 0) {
+                    RestApiEvents.PopularMoviesDataLoadedEvent movieDataLoadedEvent = new RestApiEvents.PopularMoviesDataLoadedEvent
+                            (getPopularMoviesResponse.getPageNo(), getPopularMoviesResponse.getPopularMovies(), context);
+                    EventBus.getDefault().post(movieDataLoadedEvent);
+                }
             }
         });
     }

@@ -71,5 +71,6 @@ public class BaseRecyclerAdapter<T extends BaseViewHolder, W> extends RecyclerVi
 
     public void setNewData(List<MoviesVO> newData) {
         this.newData = newData;
+        notifyDataSetChanged();
     }
 }

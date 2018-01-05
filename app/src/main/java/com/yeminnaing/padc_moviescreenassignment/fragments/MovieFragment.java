@@ -138,7 +138,7 @@ public class MovieFragment extends BaseFragment implements MovieItemDelegate, an
 
             do{
 
-                MoviesVO movies = MoviesVO.parseFromCursor(data);
+                MoviesVO movies = MoviesVO.parseFromCursor(getContext(), data);
                 moviesList.add(movies);
             }while (data.moveToNext());
 
