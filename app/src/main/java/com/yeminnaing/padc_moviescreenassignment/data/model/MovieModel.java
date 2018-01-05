@@ -50,14 +50,40 @@ public class MovieModel {
         mMovies.addAll(event.getLoadedMovies());
         mMoviesPageIndex = event.getLoadedPageIndex() + 1;
 
-        ContentValues[] moviesCVs = new ContentValues[event.getLoadedMovies().size()];
-        for(int index=0; index< moviesCVs.length; index++){
-            moviesCVs[index] = event.getLoadedMovies().get(index).parseToContentValues();
+        ContentValues[] movieCVs = new ContentValues[event.getLoadedMovies().size()];
+        List<ContentValues> genreCVList = new ArrayList<>();
+        List<ContentValues> movieGenreCVList = new ArrayList<>();
 
+        for (int index = 0; index < movieCVs.length; index++) {
+
+            MoviesVO movies = event.getLoadedMovies().get(index);
+            movieCVs[index] = movies.parseToContentValues();
+
+            for (int genreId : movies.getGenreIds()) {
+                ContentValues genreIdInMovieCV = new ContentValues();
+                genreIdInMovieCV.put(Contract.GenreEntry.COLUMN_GENRE_ID, genreId);
+                genreCVList.add(genreIdInMovieCV);
+            }
+
+            for (int i = 0; i < movies.getGenreIds().size(); i++) {
+                ContentValues movieGenreCV = new ContentValues();
+                movieGenreCV.put(Contract.MovieGenreEntry.COLUMN_GENRE_ID, String.valueOf(movies.getGenreIds()));
+                movieGenreCV.put(Contract.MovieGenreEntry.COLUMN_MOVIE_ID, movies.getId());
+                movieGenreCVList.add(movieGenreCV);
+            }
         }
 
-       int instertedRow = event.getContext().getContentResolver().bulkInsert(Contract.MovieEntry.CONTENT_URI, moviesCVs);
-        Log.d(App.LOG_TAG, "Inserted Row: " + instertedRow);
+        int insertedGenre = event.getContext().getContentResolver().bulkInsert(Contract.GenreEntry.CONTENT_URI,
+                genreCVList.toArray(new ContentValues[0]));
+        Log.d(App.LOG_TAG, "insertedGenre" + insertedGenre);
+
+        int insertedMovieGenre = event.getContext().getContentResolver().bulkInsert(Contract.MovieGenreEntry.CONTENT_URI,
+                movieGenreCVList.toArray(new ContentValues[0]));
+        Log.d(App.LOG_TAG, "insertedMovieGenre" + insertedMovieGenre);
+
+        int insertedMovies = event.getContext().getContentResolver().bulkInsert(Contract.MovieEntry.CONTENT_URI,
+                movieCVs);
+        Log.d(App.LOG_TAG, "Inserted News" + insertedMovies);
 
 
     }

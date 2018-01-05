@@ -3,6 +3,7 @@ package com.yeminnaing.padc_moviescreenassignment.adapters;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.yeminnaing.padc_moviescreenassignment.data.vo.MoviesVO;
 import com.yeminnaing.padc_moviescreenassignment.viewholders.BaseViewHolder;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 public class BaseRecyclerAdapter<T extends BaseViewHolder, W> extends RecyclerView.Adapter<T> {
 
     protected List<W> mData;
+    private List<MoviesVO> newData;
 
     BaseRecyclerAdapter() {
         mData = new ArrayList<>();
@@ -65,5 +67,9 @@ public class BaseRecyclerAdapter<T extends BaseViewHolder, W> extends RecyclerVi
     public void clearData() {
         mData = new ArrayList<>();
         notifyDataSetChanged();
+    }
+
+    public void setNewData(List<MoviesVO> newData) {
+        this.newData = newData;
     }
 }

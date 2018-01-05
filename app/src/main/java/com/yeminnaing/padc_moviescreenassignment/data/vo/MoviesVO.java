@@ -1,11 +1,13 @@
 package com.yeminnaing.padc_moviescreenassignment.data.vo;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 
 import com.google.gson.annotations.SerializedName;
 import com.yeminnaing.padc_moviescreenassignment.persistance.Contract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -114,40 +116,61 @@ public class MoviesVO {
 
     public ContentValues parseToContentValues(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.MovieEntry.COLUMN_ID, id);
+        contentValues.put(Contract.MovieEntry.COLUMN_MOVIE_ID, id);
         contentValues.put(Contract.MovieEntry.COLUMN_VOTE_COUNT, voteCount);
-        contentValues.put(Contract.MovieEntry.COLUMN_VIDEO, video ? 1 : 0);
+        contentValues.put(Contract.MovieEntry.COLUMN_IS_VIDEO, video ? 1 : 0);
         contentValues.put(Contract.MovieEntry.COLUMN_VOTE_AVERAGE, voteAverage);
         contentValues.put(Contract.MovieEntry.COLUMN_TITLE, title);
         contentValues.put(Contract.MovieEntry.COLUMN_POPULARITY, popularity);
         contentValues.put(Contract.MovieEntry.COLUMN_POSTER_PATH, posterPath);
-        contentValues.put(Contract.MovieEntry.COLUMN_ORIGINL_LANGUAGE, originalLanguage);
+        contentValues.put(Contract.MovieEntry.COLUMN_ORIGINAL_LANGUAGE, originalLanguage);
         contentValues.put(Contract.MovieEntry.COLUMN_ORIGINAL_TITLE, originalTitle);
         contentValues.put(Contract.MovieEntry.COLUMN_BACKDROP_PATH, backdropPath);
-        contentValues.put(Contract.MovieEntry.COLUMN_ADULT, adult ? 1 : 0);
+        contentValues.put(Contract.MovieEntry.COLUMN_IS_ADULT, adult ? 1 : 0);
         contentValues.put(Contract.MovieEntry.COLUMN_OVERVIEW, overview);
         contentValues.put(Contract.MovieEntry.COLUMN_RELEASE_DATE, releaseDate);
         return contentValues;
 
     }
 
-    public static MoviesVO parseFromCursor(Cursor cursor){
+    public static MoviesVO parseFromCursor(Context context, Cursor cursor){
 
         MoviesVO movies = new MoviesVO();
-        movies.id = cursor.getInt(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_ID));
+        movies.id = cursor.getInt(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_MOVIE_ID));
         movies.voteCount = cursor.getInt(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_VOTE_COUNT));
-        movies.video = cursor.getInt(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_VIDEO)) == 1;
+        movies.video = cursor.getInt(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_IS_VIDEO)) == 1;
         movies.voteAverage = cursor.getFloat(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_VOTE_AVERAGE));
         movies.title = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_TITLE));
         movies.popularity = cursor.getFloat(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_POPULARITY));
         movies.posterPath = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_POSTER_PATH));
-        movies.originalLanguage = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_ORIGINL_LANGUAGE));
+        movies.originalLanguage = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_ORIGINAL_LANGUAGE));
         movies.originalTitle = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_ORIGINAL_TITLE));
         movies.backdropPath = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_BACKDROP_PATH));
-        movies.adult = cursor.getInt(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_ADULT)) == 1;
+        movies.adult = cursor.getInt(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_IS_ADULT)) == 1;
         movies.overview = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_OVERVIEW));
         movies.releaseDate = cursor.getString(cursor.getColumnIndex(Contract.MovieEntry.COLUMN_RELEASE_DATE));
         return movies;
 
+    }
+
+    private static List<Integer> loadGenreInMovie(Context context, String movieId) {
+        Cursor genreInMovieCursor = context.getContentResolver().query(Contract.MovieGenreEntry.CONTENT_URI,
+                null,
+                Contract.MovieGenreEntry.COLUMN_MOVIE_ID + " = ?", new String[]{movieId},
+                null);
+
+        if (genreInMovieCursor != null && genreInMovieCursor.moveToFirst()) {
+            List<Integer> genreInMovie = new ArrayList<>();
+            do {
+                genreInMovie.add(
+                        genreInMovieCursor.getInt(
+                                genreInMovieCursor.getColumnIndex(Contract.MovieGenreEntry.COLUMN_GENRE_ID)
+                        )
+                );
+            } while (genreInMovieCursor.moveToNext());
+            genreInMovieCursor.close();
+            return genreInMovie;
+        }
+        return null;
     }
 }
