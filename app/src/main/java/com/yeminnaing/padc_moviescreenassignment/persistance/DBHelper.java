@@ -10,37 +10,43 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "movies.db";
 
 
-    private static final String SQL_CREATE_MOVIE_TABLE = "CREATE TABLE " + Contract.MovieEntry.TABLE_NAME + "(" +
+    private static final String SQL_CREATE_MOVIE_TABLE = "CREATE TABLE " + Contract.MovieEntry.TABLE_NAME + " (" +
             Contract.MovieEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            Contract.MovieEntry.COLUMN_VOTE_COUNT + " TEXT, " +
-            Contract.MovieEntry.COLUMN_ID + " TEXT NOT NULL, " +
-            Contract.MovieEntry.COLUMN_VIDEO + "TEXT NOT NULL, " +
-            Contract.MovieEntry.COLUMN_VOTE_AVERAGE + " TEXT, " +
-            Contract.MovieEntry.COLUMN_POPULARITY + " TEXT, " +
+            Contract.MovieEntry.COLUMN_VOTE_COUNT + " INTEGER, " +
+            Contract.MovieEntry.COLUMN_MOVIE_ID + " TEXT, " +
+            Contract.MovieEntry.COLUMN_IS_VIDEO + " BOOLEAN, " +
+            Contract.MovieEntry.COLUMN_VOTE_AVERAGE + " DOUBLE, " +
+            Contract.MovieEntry.COLUMN_TITLE + " TEXT NOT NULL, " +
+            Contract.MovieEntry.COLUMN_POPULARITY + " DOUBLE, " +
             Contract.MovieEntry.COLUMN_POSTER_PATH + " TEXT, " +
-            Contract.MovieEntry.COLUMN_ORIGINL_LANGUAGE + " TEXT NOT NULL, " +
-            Contract.MovieEntry.COLUMN_ORIGINAL_TITLE + " TEXT NOT NULL, " +
-            Contract.MovieEntry.COLUMN_BACKDROP_PATH + " TEXT NOT NULL, " +
-            Contract.MovieEntry.COLUMN_ADULT + " TEXT, " +
+            Contract.MovieEntry.COLUMN_ORIGINAL_LANGUAGE + " TEXT, " +
+            Contract.MovieEntry.COLUMN_ORIGINAL_TITLE + " TEXT, " +
+            Contract.MovieEntry.COLUMN_BACKDROP_PATH + " TEXT, " +
+            Contract.MovieEntry.COLUMN_IS_ADULT + " BOOLEAN, " +
             Contract.MovieEntry.COLUMN_OVERVIEW + " TEXT, " +
-            Contract.MovieEntry.COLUMN_RELEASE_DATE + "TEXT NOT NULL, " +
+            Contract.MovieEntry.COLUMN_RELEASE_DATE + " TEXT, " +
 
-            "UNIQUE (" + Contract.MovieEntry._ID + "," + Contract.MovieEntry.COLUMN_TITLE + ") ON CONFLICT IGNORE " + " );";
+            " UNIQUE (" + Contract.MovieEntry.COLUMN_MOVIE_ID + ") ON CONFLICT REPLACE" +
+            " );";
 
+    private static final String SQL_CREATE_GENRE_TABLE = "CREATE TABLE " + Contract.GenreEntry.TABLE_NAME + " (" +
+            Contract.GenreEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            Contract.GenreEntry.COLUMN_GENRE_ID + " TEXT, " +
+            Contract.GenreEntry.COLUMN_GENRE_NAME + " TEXT, " +
 
-    private static final String SQL_CREATE_GENRE_IDS_TABLE = " CREATE TABLE " + Contract.GenreIdsEntry.TABLE_NAME + "(" +
-            Contract.GenreIdsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            Contract.GenreIdsEntry.COLUMN_MOVIE_ID + "TEXT NOT NULL, " +
-            Contract.GenreIdsEntry.COLUMN_GENRE_IDS + " TEXT NOT NULL, " +
-            Contract.GenreIdsEntry.COLUMN_GENRE_NAME + " TEXT NOT NULL, " +
+            " UNIQUE (" + Contract.GenreEntry.COLUMN_GENRE_ID + ") ON CONFLICT REPLACE" +
+            " );";
 
-            "UNIQUE (" + Contract.GenreIdsEntry._ID + ") ON CONFLICT IGNORE " + ");";
+    private static final String SQL_CREATE_MOVIE_GENRE_TABLE = "CREATE TABLE " + Contract.MovieGenreEntry.TABLE_NAME + " (" +
+            Contract.MovieGenreEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            Contract.MovieGenreEntry.COLUMN_GENRE_ID + " TEXT, " +
+            Contract.MovieGenreEntry.COLUMN_MOVIE_ID + " TEXT" +
 
-
+            " );";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,21 +54,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
-        sqLiteDatabase.execSQL(SQL_CREATE_GENRE_IDS_TABLE);
-        sqLiteDatabase.execSQL(SQL_CREATE_MOVIE_TABLE);
-
-
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(SQL_CREATE_MOVIE_TABLE);
+        db.execSQL(SQL_CREATE_GENRE_TABLE);
+        db.execSQL(SQL_CREATE_MOVIE_GENRE_TABLE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.MovieEntry.TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.GenreIdsEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.MovieGenreEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.MovieEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.GenreEntry.TABLE_NAME);
 
-        onCreate(sqLiteDatabase);
-
+        onCreate(db);
     }
 }

@@ -26,7 +26,7 @@ public class BaseRecyclerAdapter<T extends BaseViewHolder, W> extends RecyclerVi
 
     @Override public void onBindViewHolder(T holder, int position) {
         holder.setData(mData.get(position));
-        holder.bindData();
+        //holder.bindData();
     }
 
     @Override public int getItemCount() {

@@ -40,17 +40,34 @@ public class MovieViewHolder extends BaseViewHolder<MoviesVO> {
     @Override
     public void setData(MoviesVO data) {
         mPopularMovie = data;
+
+
+        if(data != null){
+            if(data.getTitle() != null){
+                tvTitle.setText(data.getTitle());
+            }
+            if(data.getPosterPath() != null){
+                Glide.with(itemView.getContext())
+                        .load(AppConstants.IMAGE_BASE_URL + mPopularMovie.getPosterPath())
+                        .into(ivPoster);
+
+            }
+
+            tvRating.setText(String.valueOf(mPopularMovie.getVoteAverage()));
+
+        }
+
     }
 
     @Override
     public void bindData() {
 
-        tvRating.setText(String.valueOf(mPopularMovie.getVoteAverage()));
-        tvTitle.setText(mPopularMovie.getTitle());
+
+      /*  tvTitle.setText(mPopularMovie.getTitle());
 
         Glide.with(itemView.getContext())
                 .load(AppConstants.IMAGE_BASE_URL + mPopularMovie.getPosterPath())
-                .into(ivPoster);
+                .into(ivPoster);*/
     }
 
     @Override
